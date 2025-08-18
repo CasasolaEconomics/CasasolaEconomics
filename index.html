@@ -1,13 +1,269 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial scale=1.0"
-    <!--<title> Casasola Economics</title>-->
-  </head>
-  <body>
-    <h1>Welcome to Casasola Economics</h1>
-    <p>This site is in its early stages and is intended to share content on economic theory, statistics with an emphasis on econometrics, and theoretical quantitative finance. 
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Casasola Economics</title>
+  <meta name="description" content="Economics, econometrics, and theoretical quantitative finance by Casasola Economics." />
+  <meta property="og:title" content="Casasola Economics" />
+  <meta property="og:description" content="Economics, econometrics, and theoretical quantitative finance." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#002060" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/newcomputermodern@1.0.5/fonts/otf/newcomputermodern.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* - Primary brand color: RGB(0,32,96)  =>  #002060
+       - Secondary/light:     RGB(242,242,242) => #F2F2F2
+       - Font stack aims to mimic LaTeX (Computer Modern)*/
+
+    :root {
+      --brand: #002060;
+      --light: #F2F2F2;
+      --muted: #c7d0ea;
+      --shadow: 0 10px 30px rgba(0,0,0,.25);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+
+    body {
+      margin: 0;
+      font-family: "New Computer Modern Serif", "NewCM10", "CMU Serif", "STIX Two Text", "Times New Roman", Times, serif;
+      color: var(--light);
+      background: radial-gradient(1200px 800px at 80% -10%, rgba(255,255,255,.08), transparent 60%),
+                  linear-gradient(180deg, #021843, var(--brand) 60%);
+      line-height: 1.6;
+      font-kerning: normal;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body::before {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: 60px 60px, 60px 60px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,.9), rgba(0,0,0,0));
+      z-index: 0;
+    }
+
+    header {
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: blur(6px);
+      background: color-mix(in oklab, var(--brand) 85%, black 15% / 20%);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav {
+      max-width: 1100px; margin: 0 auto; padding: 14px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--light); }
+    .brand-title { font-weight: 700; letter-spacing: .4px; }
+    .brand-sub { font-weight: 400; opacity: .9; }
+    .menu { display: flex; gap: 14px; }
+    .menu a {
+      text-decoration: none; color: var(--light); opacity: .9; font-weight: 600; padding: 8px 12px;
+      border-radius: 10px; transition: .2s ease;
+    }
+    .menu a:hover { background: rgba(255,255,255,.08); opacity: 1; }
+
+    .hero {
+      position: relative; z-index: 1;
+      max-width: 1100px; margin: 60px auto 30px; padding: 0 20px; display: grid;
+      grid-template-columns: 120px 1fr; gap: 24px; align-items: center;
+    }
+    .logo-wrap {
+      width: 120px; height: 120px; border-radius: 50%; background: rgba(255,255,255,.06);
+      display: grid; place-items: center; box-shadow: var(--shadow);
+    }
+    h1 {
+      margin: 0 0 6px; font-weight: 700; font-size: clamp(28px, 4vw, 40px);
+      letter-spacing: .2px; /* Keep tight for a typeset look */
+    }
+    .tagline { margin: 0; opacity: .9; font-style: italic; }
+
+
+    main { position: relative; z-index: 1; }
+    .card {
+      max-width: 1100px; margin: 20px auto 60px; padding: 26px; background: rgba(2, 28, 79, .55);
+      border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); box-shadow: var(--shadow);
+    }
+    .card p { margin: 0; font-size: 1.05rem; }
+
+    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 12px; font-weight: 700; text-decoration: none;
+      color: var(--brand); background: var(--light); border: 2px solid var(--light);
+      transition: transform .12s ease, box-shadow .2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
+    .btn.secondary { background: transparent; color: var(--light); border-color: rgba(255,255,255,.5); }
+
+    section { max-width: 1100px; margin: 0 auto 60px; padding: 0 20px; }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    .tile { grid-column: span 12; padding: 18px; border-radius: 14px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); }
+    .tile h3 { margin-top: 0; }
+
+    @media (min-width: 720px) { .tile { grid-column: span 6; } }
+
+    footer {
+      color: var(--muted); font-size: 14px; padding: 28px 20px; border-top: 1px solid rgba(255,255,255,.08);
+      background: #021843; text-align: center;
+    }
+    .footer-links { display: inline-flex; gap: 16px; margin-left: 8px; }
+    .footer-links a { color: var(--muted); text-decoration: none; }
+    .footer-links a:hover { color: var(--light); }
+
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,1px,1px); white-space: nowrap; border: 0; }
+
+    /* =============================================================
+       OPTIONAL: Host fonts locally (replace CDN with your files)
+       -------------------------------------------------------------
+       1) Create /fonts/ and put NewCM OTF files there.
+       2) Uncomment below and update src: urls.
+
+       @font-face {
+         font-family: 'New Computer Modern Serif';
+         src: url('/fonts/NewCM10-Book.otf') format('opentype');
+         font-weight: 400; font-style: normal; font-display: swap;
+       }
+       @font-face {
+         font-family: 'New Computer Modern Serif';
+         src: url('/fonts/NewCM10-Bold.otf') format('opentype');
+         font-weight: 700; font-style: normal; font-display: swap;
+       }
+    ============================================================= */
+  </style>
+
+  <!-- Inline SVG favicon that echoes the logo (light on dark) -->
+  <link rel="icon" href="data:image/svg+xml;utf8,<?xml version='1.0' encoding='UTF-8'?>
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'>
+    <circle cx='128' cy='128' r='120' fill='%23F2F2F2'/>
+    <rect x='56' y='120' width='24' height='60' rx='6' fill='%23002060'/>
+    <rect x='100' y='96' width='24' height='84' rx='6' fill='%23002060'/>
+    <rect x='144' y='68' width='24' height='112' rx='6' fill='%23002060'/>
+    <path d='M64 144 L112 110 L152 126 L196 78' stroke='%23002060' stroke-width='14' fill='none' stroke-linecap='round' stroke-linejoin='round'/>
+    <path d='M196 78 L176 78 M196 78 L196 98' stroke='%23002060' stroke-width='14' stroke-linecap='round'/>
+  </svg>" />
+</head>
+
+<body>
+  <header>
+    <nav class="nav" aria-label="Primary">
+      <a class="brand" href="#">
+        <span aria-hidden="true">
+          <!-- Inline logo echoing the provided mark -->
+          <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="47" stroke="#F2F2F2" stroke-width="6" />
+            <rect x="20" y="56" width="8" height="24" rx="2" fill="#F2F2F2" />
+            <rect x="36" y="44" width="8" height="36" rx="2" fill="#F2F2F2" />
+            <rect x="52" y="32" width="8" height="48" rx="2" fill="#F2F2F2" />
+            <path d="M22 58 L40 46 L58 53 L78 30" stroke="#F2F2F2" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M78 30 L68 30 M78 30 L78 40" stroke="#F2F2F2" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="sr-only">Casasola Economics</span>
+        <div>
+          <div class="brand-title">CASASOLA</div>
+          <div class="brand-sub">ECONOMICS</div>
+        </div>
+      </a>
+
+      <div class="menu">
+        <a href="#about">About</a>
+        <a href="#posts">Posts</a>
+        <a href="#research">Research</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="logo-wrap" aria-hidden="true">
+      <!-- Larger inline logo for hero -->
+      <svg width="84" height="84" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="47" stroke="#F2F2F2" stroke-width="6" />
+        <rect x="20" y="56" width="8" height="24" rx="2" fill="#F2F2F2" />
+        <rect x="36" y="44" width="8" height="36" rx="2" fill="#F2F2F2" />
+        <rect x="52" y="32" width="8" height="48" rx="2" fill="#F2F2F2" />
+        <path d="M22 58 L40 46 L58 53 L78 30" stroke="#F2F2F2" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M78 30 L68 30 M78 30 L78 40" stroke="#F2F2F2" stroke-width="6" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div>
+      <h1>Welcome to Casasola Economics</h1>
+      <p class="tagline">Economics & econometrics • Quantitative finance • Research & notes</p>
+      <div class="cta-row">
+        <a class="btn" href="#posts">Read posts</a>
+        <a class="btn secondary" href="#research">Explore research</a>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="card" id="about">
+      <p>This site is in its early stages and is intended to share content on economic theory, statistics with an emphasis on econometrics, and theoretical quantitative finance.
       Related topics may also be featured.</p>
-  </body>
+    </div>
+
+    <section id="posts">
+      <h2 class="sr-only">Posts</h2>
+      <div class="grid">
+        <article class="tile">
+          <h3>Notes on Econometric Inference</h3>
+          <p>Asymptotics, identification, and robust inference. <em>Coming soon.</em></p>
+        </article>
+        <article class="tile">
+          <h3>Quant Finance Sketches</h3>
+          <p>Stochastic calculus snippets, pricing ideas, and risk modeling. <em>Drafts in progress.</em></p>
+        </article>
+      </div>
+    </section>
+
+    <section id="research">
+      <h2 class="sr-only">Research</h2>
+      <div class="grid">
+        <div class="tile">
+          <h3>Working Papers</h3>
+          <p>Links to arXiv/SSRN or PDFs can live here.</p>
+        </div>
+        <div class="tile">
+          <h3>Data & Code</h3>
+          <p>Point this to your GitHub repos, notebooks, or datasets.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 class="sr-only">Contact</h2>
+      <div class="tile" style="max-width:1100px;margin:0 auto 60px;">
+        <h3>Get in touch</h3>
+        <p>Email: <a href="mailto:contact@example.com" style="color:var(--light);">casasola.economics@hotmail.com</a> 
+           • GitHub: <a href="https://github.com/USERNAME" style="color:var(--light);">@CasasolaEconomics</a> 
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>© <span id="year"></span> Casasola Economics.
+      <span class="footer-links">
+        <a href="#">Home</a>
+        <a href="#posts">Posts</a>
+        <a href="#research">Research</a>
+      </span>
+    </div>
+  </footer>
+
+  <script>
+    // Update copyright year automatically
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>
