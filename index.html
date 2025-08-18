@@ -4,28 +4,25 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Casasola Economics</title>
-  <meta name="description" content="Economics, econometrics, and quantitative finance" />
+  <meta name="description" content="Economics, econometrics, quantitative finance and others" />
   <meta name="theme-color" content="#002060" />
 
-  <!-- LaTeX-like serif (Computer Modern). If you prefer local hosting,
-       download the OTFs and use @font-face. -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/computer-modern-web-font@1.0.0/css/cmun-serif.css">
 
   <style>
-    /* ================= BRAND COLORS ================= */
     :root {
-      --brand: #002060;   /* Azul corporativo */
-      --light: #F2F2F2;   /* Gris claro para detalles si lo necesitas */
-      --ink: #1a1a1a;     /* Texto principal sobre blanco */
+      --brand: #002060;
+      --light: #F2F2F2;
+      --ink: #1a1a1a;
     }
 
-    /* ================= PAGE BASICS ================= */
+
     html, body { height: 100%; }
     body {
       margin: 0;
-      font-family: 'CMU Serif', serif; /* Estilo LaTeX */
+      font-family: 'CMU Serif', serif;
       color: var(--ink);
-      background: #ffffff; /* Fondo blanco */
+      background: #ffffff;
       line-height: 1.6;
     }
 
@@ -35,7 +32,7 @@
       padding: 0 20px;
     }
 
-    /* Encabezado minimalista */
+
     h1 {
       margin: 0 0 12px;
       font-weight: 700;
@@ -46,7 +43,6 @@
 
     p { font-size: 1.05rem; }
 
-    /* Logo (opcional). Cambia el src a tu archivo */
     .logo {
       width: 96px; height: 96px;
       object-fit: contain;
@@ -54,7 +50,6 @@
       margin-bottom: 16px;
     }
 
-    /* Link al repositorio */
     .link {
       display: inline-block;
       margin-top: 18px;
@@ -66,7 +61,6 @@
     }
     .link:hover { opacity: .85; }
 
-    /* Pie de página simple */
     footer { margin-top: 40px; font-size: .95rem; color: #555; }
   </style>
 </head>
@@ -82,17 +76,14 @@
     <h1>Welcome to Casasola Economics</h1>
     <p>This site is in its early stages and is intended to share content on economic theory, statistics with an emphasis on econometrics, and theoretical quantitative finance.</p>
 
-    <!-- Email de contacto: CAMBIA el correo a tu dirección real -->
-    <p><strong>Contact:</strong> <a href="mailto:contact@example.com" class="link" style="border:none">contact@example.com</a></p>
+    <p><strong>Contact:</strong> <a href="mailto:casasola.economics@hotmail.com" class="link" style="border:none">casasola.economics@hotmail.com</a></p>
 
-    <!-- Enlace al otro repositorio. CAMBIA USERNAME y, si tu repo usa otro slug, ajusta el nombre. -->
     <a class="link" href="https://github.com/USERNAME/Intermediate-International-Trade" target="_blank" rel="noopener">Intermediate International Trade →</a>
 
     <footer>© <span id="year"></span> Casasola Economics</footer>
   </main>
 
   <script>
-    // Actualiza el año automáticamente
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
